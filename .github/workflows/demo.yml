@@ -1,5 +1,5 @@
 
-name: Demo Yml
+name: demo Yml
 
 on:
   pull_request:
