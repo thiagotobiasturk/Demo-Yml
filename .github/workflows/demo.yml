@@ -1,21 +1,20 @@
-name: demo Yml
+name: Notify on PR Opened
+
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  Demo-yml:
+  notify_on_pr_opened:
     runs-on: ubuntu-latest
     steps:
-      - name: Get PR number
-        id: pr_number
-        run: echo "PR number is ${{ github.event.pull_request.number }}"
-
-      - name: Send reference to webhook
+      - name: Send Slack notification
+        uses: slack/notify@v3
         env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        run: |
-            curl -X POST \
-            -H "Content-Type: application/json" \
-            -d "{\"pr_number\": ${{ steps.pr_number.outputs.pr_number }}}}" \
-            $WEBHOOK_URL
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_CHANNEL: general  
+          SLACK_MESSAGE: |
+            Nuevo Pull Request abierto (#${{ github.event.pull_request.number }}):
+            - Título: ${{ github.event.pull_request.title }}
+            - Autor: ${{ github.event.pull_request.user.login }}
+            - URL: ${{ github.event.pull_request.html_url }}
