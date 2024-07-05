@@ -1,12 +1,19 @@
-name: Demo Pr
+name: Demo Yml
 
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  Demo_yml:
+  Demo-yml:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo message
-        run: echo "Este es un mensaje de prueba para un Pull Request"
+      - name: Get PR number
+        id: pr_number
+        run: echo "PR number is ${{ github.event.pull_request.number }}"
+
+      - name: Send reference to webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}  # Define tu variable secreta con la URL del webhook en los secretos del repositorio
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"pr_number": '${{ steps.pr_number.outputs.pr_number }}'}' https://hooks.slack.com/services/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
