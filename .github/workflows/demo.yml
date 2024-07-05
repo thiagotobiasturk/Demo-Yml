@@ -1,5 +1,6 @@
 
-name: Demo Yml
+
+name: demo Yml
 on:
   pull_request:
     types: [opened]
@@ -14,7 +15,6 @@ jobs:
 
       - name: Send reference to webhook
         env:
-
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{"pr_number": '${{ steps.pr_number.outputs.pr_number }}'}' $WEBHOOK_URL
