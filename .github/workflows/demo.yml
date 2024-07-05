@@ -1,0 +1,12 @@
+name: Demo Pr
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  echo_on_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo message
+        run: echo "Este es un mensaje de prueba para un Pull Request"
