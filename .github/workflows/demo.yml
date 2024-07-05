@@ -1,7 +1,6 @@
 name: Demo yml
 on:
-  pull_request:
-    types: [opened]
+  push
 
 jobs:
   notify_on_pr_opened:
