@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack notification
-        uses: slack/notify@v3
+        uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}  # Define tu secreto con la URL del webhook en los ajustes del repositorio
           SLACK_CHANNEL: general  # Cambia a tu canal de Slack deseado
