@@ -5,7 +5,7 @@ on:
     types: [opened]
 
 jobs:
-  echo_on_pr:
+  Demo_yml:
     runs-on: ubuntu-latest
     steps:
       - name: Echo message
