@@ -1,12 +1,19 @@
-name: Demo Pr
+name: Demo yml
 
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  Demo_yml:
+  Demo-yml:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo message
-        run: echo "Este es un mensaje de prueba para un Pull Request"
+      - name: Get PR number
+        id: pr_number
+        run: echo "PR number is ${{ github.event.pull_request.number }}"
+
+      - name: Send reference to webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}  
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"pr_number": '${{ steps.pr_number.outputs.pr_number }}'}' $WEBHOOK_URL
