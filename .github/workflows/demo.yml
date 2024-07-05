@@ -10,7 +10,6 @@ jobs:
       - name: Send Slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}  
-          SLACK_CHANNEL: general  
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}    
           SLACK_MESSAGE: |
             Nuevo Pull Request abierto 
