@@ -1,5 +1,4 @@
-name: Notify on PR Opened
-
+name: Demo yml
 on:
   pull_request:
     types: [opened]
@@ -9,12 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack notification
-        uses: slack/notify@v3
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_CHANNEL: general  
-          SLACK_MESSAGE: |
-            Nuevo Pull Request abierto (#${{ github.event.pull_request.number }}):
-            - Título: ${{ github.event.pull_request.title }}
-            - Autor: ${{ github.event.pull_request.user.login }}
-            - URL: ${{ github.event.pull_request.html_url }}
+        uses: rtCamp/action-slack-notify@v2
+        with:
+          slack_webhook: ${{ secrets.WEBHOOK_URL }}
+          slack_message: |
+            Nuevo Pull Request abierto 
