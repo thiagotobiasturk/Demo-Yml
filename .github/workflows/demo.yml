@@ -1,19 +1,16 @@
-name: Notify on PR Opened
+name: Demo Yml
 
 on:
   push
 
 jobs:
-  notify_on_pr_opened:
+  pr:
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}  # Define tu secreto con la URL del webhook en los ajustes del repositorio
-          SLACK_CHANNEL: general  # Cambia a tu canal de Slack deseado
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK}}  
+          SLACK_CHANNEL: general  
           SLACK_MESSAGE: |
-            Nuevo Pull Request abierto (#${{ github.event.pull_request.number }}):
-            - Título: ${{ github.event.pull_request.title }}
-            - Autor: ${{ github.event.pull_request.user.login }}
-            - URL: ${{ github.event.pull_request.html_url }}
+            Nuevo Pull Request abierto 
