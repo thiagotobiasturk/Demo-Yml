@@ -1,15 +1,17 @@
-name: Demo yml
+name: Demo Yml
+
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  notify_on_pr_opened:
+  pr:
     runs-on: ubuntu-latest
     steps:
       - name: Send Slack notification
+        if: github.event_name == 'pull_request'
         uses: rtCamp/action-slack-notify@v2
-        with:
-          slack_webhook: ${{ secrets.WEBHOOK_URL }}
-          slack_message: |
-            Nuevo Pull Request abierto 
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}    
+          SLACK_MESSAGE: |
+            Nuevo Pull Request abierto
