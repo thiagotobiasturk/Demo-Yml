@@ -1,4 +1,7 @@
+
 name: Demo Yml
+
+name: Demo yml
 
 on:
   pull_request:
@@ -14,6 +17,12 @@ jobs:
 
       - name: Send reference to webhook
         env:
+
           WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}  # Define tu variable secreta con la URL del webhook en los secretos del repositorio
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{"pr_number": '${{ steps.pr_number.outputs.pr_number }}'}' https://hooks.slack.com/services/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
+
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}  
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"pr_number": '${{ steps.pr_number.outputs.pr_number }}'}' $WEBHOOK_URL
+
