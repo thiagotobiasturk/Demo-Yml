@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Discord notification
-        if: github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: https://discord.com/api/webhooks/1262462826539126825/Wmf6s7_MLl_qinTIK7pcOThEigAi0ZUB85wDKHJVy_u1rjzkAscIocfr6Xu45_XZvWbJ
