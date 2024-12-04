@@ -1,27 +1,31 @@
-name: PR Yml
+name: Run Echo Commands
 
 on:
   push:
     branches:
-       - main
+      - develop
+      - master
   pull_request:
-    types: [opened]
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - develop
+      - master
 
 jobs:
-  pr:
+  echo-commands:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Send Discord notification
-        if: github.event_name == 'pull_request'
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: https://discord.com/api/webhooks/1262462826539126825/Wmf6s7_MLl_qinTIK7pcOThEigAi0ZUB85wDKHJVy_u1rjzkAscIocfr6Xu45_XZvWbJ
-          username: 'PR Github Actions -  Bot'
-          content: |
-            New Pull Request Open! :
-               Title: ${{ github.event.pull_request.title }}
-               Description: ${{ github.event.pull_request.body }}
-               Created By: ${{ github.event.pull_request.user.login }}
-               Source Branch: ${{ github.event.pull_request.head.ref }}
-               Target Branch: ${{ github.event.pull_request.base.ref }}
-            Pull Request URL: ${{ github.event.pull_request.html_url }}
+      # Paso 1: Echo "Hola Mundo"
+      - name: Echo Hola Mundo
+        run: echo "Hola Mundo"
+      
+      # Paso 2: Echo "Morrowind"
+      - name: Echo Morrowind
+        run: echo "Morrowind"
+        
+    # Solo ejecutará si el PR ha sido aprobado
+    if: github.event.pull_request.review.state == 'approved'
