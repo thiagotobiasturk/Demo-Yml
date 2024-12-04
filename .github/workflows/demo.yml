@@ -1,17 +1,31 @@
-name: Demo Yml
+name: Run Echo Commands
 
 on:
+  push:
+    branches:
+      - develop
+      - main
   pull_request:
-    types: [opened]
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - develop
+      - master
 
 jobs:
-  pr:
+  echo-commands:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Send Slack notification
-        if: github.event_name == 'pull_request'
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}    
-          SLACK_MESSAGE: |
-            Nuevo Pull Request abierto
+      # Paso 1: Echo "Hola Mundo"
+      - name: Echo Hola Mundo
+        run: echo "Hola Mundo"
+      
+      # Paso 2: Echo "Morrowind"
+      - name: Echo Morrowind
+        run: echo "Morrowind"
+        
+    # Solo ejecutará si el PR ha sido aprobado
+    if: github.event.pull_request.review.state == 'approved'
