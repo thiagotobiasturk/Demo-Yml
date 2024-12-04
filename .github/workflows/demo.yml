@@ -1,7 +1,7 @@
 name: Run Echo Commands
 
 on:
-  push:
+  push: 
     branches:
       - develop
       - master
